@@ -1,0 +1,415 @@
+{{ define "main" }}
+<article class="about-page">
+    <header class="about-header">
+        <div class="about-avatar-wrapper">
+            {{ with .Params.avatar }}
+            <img src="{{ . }}" alt="{{ $.Params.name }}" class="about-avatar">
+            {{ else }}
+            <div class="about-avatar about-avatar-placeholder">
+                <span>{{ substr ($.Params.name | default "?") 0 1 }}</span>
+            </div>
+            {{ end }}
+            <div class="avatar-decoration"></div>
+        </div>
+        <div class="about-intro">
+            <h1 class="about-name">{{ .Params.name | default .Title }}</h1>
+            {{ with .Params.role }}
+            <p class="about-role">{{ . }}</p>
+            {{ end }}
+            {{ with .Params.location }}
+            <p class="about-location">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                {{ . }}
+            </p>
+            {{ end }}
+        </div>
+    </header>
+
+    {{ with .Params.tagline }}
+    <blockquote class="about-tagline">
+        <p>{{ . }}</p>
+    </blockquote>
+    {{ end }}
+
+    <div class="about-content">
+        {{ .Content }}
+    </div>
+
+    {{ with .Params.skills }}
+    <section class="about-section">
+        <h2 class="section-title">
+            <span class="section-number">01</span>
+            Skills & Technologies
+        </h2>
+        <div class="skills-grid">
+            {{ range $category, $items := . }}
+            <div class="skill-category">
+                <h3 class="skill-category-title">{{ $category }}</h3>
+                <div class="skill-tags">
+                    {{ range $items }}
+                    <span class="skill-tag">{{ . }}</span>
+                    {{ end }}
+                </div>
+            </div>
+            {{ end }}
+        </div>
+    </section>
+    {{ end }}
+
+    {{ with .Params.experience }}
+    <section class="about-section">
+        <h2 class="section-title">
+            <span class="section-number">02</span>
+            Experience
+        </h2>
+        <div class="timeline">
+            {{ range . }}
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">{{ .date }}</span>
+                    <h3 class="timeline-title">{{ .title }}</h3>
+                    <p class="timeline-company">{{ .company }}</p>
+                    {{ with .description }}
+                    <p class="timeline-description">{{ . }}</p>
+                    {{ end }}
+                </div>
+            </div>
+            {{ end }}
+        </div>
+    </section>
+    {{ end }}
+
+    {{ with .Params.social }}
+    <section class="about-section about-connect">
+        <h2 class="section-title">
+            <span class="section-number">03</span>
+            Connect
+        </h2>
+        <div class="social-links">
+            {{ with .github }}
+            <a href="https://github.com/{{ . }}" class="social-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                <span>GitHub</span>
+            </a>
+            {{ end }}
+            {{ with .twitter }}
+            <a href="https://twitter.com/{{ . }}" class="social-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                <span>Twitter</span>
+            </a>
+            {{ end }}
+            {{ with .linkedin }}
+            <a href="https://linkedin.com/in/{{ . }}" class="social-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                <span>LinkedIn</span>
+            </a>
+            {{ end }}
+            {{ with .email }}
+            <a href="mailto:{{ . }}" class="social-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+                <span>Email</span>
+            </a>
+            {{ end }}
+        </div>
+    </section>
+    {{ end }}
+</article>
+
+<style>
+.about-page {
+    max-width: 720px;
+    margin: 0 auto;
+    animation: fadeUp 0.6s ease;
+}
+
+.about-header {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-bottom: 48px;
+}
+
+.about-avatar-wrapper {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.about-avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent);
+    position: relative;
+    z-index: 1;
+}
+
+.about-avatar-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-secondary);
+    font-family: var(--font-display);
+    font-size: 48px;
+    color: var(--accent);
+}
+
+.avatar-decoration {
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.05); opacity: 0.5; }
+}
+
+.about-intro {
+    flex: 1;
+}
+
+.about-name {
+    font-family: var(--font-display);
+    font-size: 36px;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+}
+
+.about-role {
+    font-size: 18px;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.about-location {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: var(--text-tertiary);
+}
+
+.about-tagline {
+    margin: 0 0 48px;
+    padding: 24px 32px;
+    border-left: 3px solid var(--accent);
+    background: var(--bg-secondary);
+    border-radius: 0 12px 12px 0;
+}
+
+.about-tagline p {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-style: italic;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.about-content {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 56px;
+}
+
+.about-content p {
+    margin-bottom: 20px;
+}
+
+.about-section {
+    margin-bottom: 56px;
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-tertiary);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.section-number {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent);
+    background: var(--tag-bg);
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.skills-grid {
+    display: grid;
+    gap: 32px;
+}
+
+.skill-category-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    font-weight: 400;
+}
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skill-tag {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 14px;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    border-radius: 20px;
+    transition: all 0.2s ease;
+}
+
+.skill-tag:hover {
+    background: var(--accent);
+    color: var(--bg-primary);
+}
+
+.timeline {
+    position: relative;
+    padding-left: 32px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: var(--border);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 32px;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -32px;
+    top: 8px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--bg-primary);
+    border: 2px solid var(--accent);
+}
+
+.timeline-date {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.02em;
+}
+
+.timeline-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--text-primary);
+    margin: 4px 0;
+    font-weight: 400;
+}
+
+.timeline-company {
+    font-size: 15px;
+    color: var(--accent);
+    margin-bottom: 8px;
+}
+
+.timeline-description {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.social-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.social-link svg {
+    width: 20px;
+    height: 20px;
+}
+
+@media (max-width: 600px) {
+    .about-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 24px;
+    }
+
+    .about-avatar {
+        width: 120px;
+        height: 120px;
+    }
+
+    .about-name {
+        font-size: 28px;
+    }
+
+    .about-tagline {
+        padding: 20px 24px;
+    }
+
+    .about-tagline p {
+        font-size: 18px;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+}
+</style>
+{{ end }}
