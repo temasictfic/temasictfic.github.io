@@ -8,7 +8,7 @@ defaultContentLanguageInSubdir = false
 
 [params]
   description = "Personal blog about programming and technology"
-  author = "Your Name"
+  author = "SÇ"
 
 [languages]
   [languages.en]
