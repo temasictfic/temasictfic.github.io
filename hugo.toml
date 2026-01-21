@@ -41,7 +41,7 @@ defaultContentLanguageInSubdir = false
     codeFences = true
     guessSyntax = true
     lineNos = false
-    noClasses = false
+    noClasses = true
     style = "rose-pine-moon"
   [markup.tableOfContents]
     startLevel = 2
