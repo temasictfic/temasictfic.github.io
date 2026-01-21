@@ -1,0 +1,65 @@
+{{ define "main" }}
+<section class="search-section">
+    <div class="search-wrapper">
+        <span class="search-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="M21 21l-4.35-4.35"></path>
+            </svg>
+        </span>
+        <input type="text" class="search-input" placeholder="{{ T "searchPlaceholder" | default "Search articles..." }}">
+    </div>
+</section>
+
+{{ $posts := where site.RegularPages "Section" "posts" }}
+{{ $allTags := slice }}
+{{ range $posts }}
+    {{ range .Params.tags }}
+        {{ $allTags = $allTags | append . }}
+    {{ end }}
+{{ end }}
+{{ $tagCounts := dict }}
+{{ range $allTags }}
+    {{ $count := index $tagCounts . | default 0 }}
+    {{ $tagCounts = merge $tagCounts (dict . (add $count 1)) }}
+{{ end }}
+
+<section class="tags-filter">
+    <span class="tag active" data-tag="all">All <span class="tag-count">{{ len $posts }}</span></span>
+    {{ range $tag, $count := $tagCounts }}
+    <span class="tag" data-tag="{{ $tag | urlize }}">{{ $tag }} <span class="tag-count">{{ $count }}</span></span>
+    {{ end }}
+</section>
+
+<div class="posts-header">
+    <h2 class="posts-title">{{ T "recentTitle" | default "Recent writings" }}</h2>
+    <select class="sort-select" id="sortSelect">
+        <option value="newest">Newest first</option>
+        <option value="oldest">Oldest first</option>
+    </select>
+</div>
+
+<div class="posts-list">
+    {{ range $posts.ByDate.Reverse }}
+    <a href="{{ .RelPermalink }}" class="post-item" data-tags="{{ delimit .Params.tags "," | urlize }}">
+        <div class="post-meta">
+            <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
+            <span class="post-reading-time">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 6v6l4 2"></path>
+                </svg>
+                {{ .ReadingTime }} min read
+            </span>
+        </div>
+        <h3 class="post-title">{{ .Title }}</h3>
+        <p class="post-excerpt">{{ .Summary | plainify | truncate 200 }}</p>
+        <div class="post-tags">
+            {{ range .Params.tags }}
+            <span class="post-tag">{{ . }}</span>
+            {{ end }}
+        </div>
+    </a>
+    {{ end }}
+</div>
+{{ end }}

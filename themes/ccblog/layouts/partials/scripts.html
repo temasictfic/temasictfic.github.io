@@ -1,0 +1,144 @@
+<script>
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    const sunIcon = themeToggle.querySelector('.sun-icon');
+    const moonIcon = themeToggle.querySelector('.moon-icon');
+
+    function updateThemeIcons() {
+        const isDark = html.getAttribute('data-theme') === 'dark';
+        sunIcon.style.display = isDark ? 'block' : 'none';
+        moonIcon.style.display = isDark ? 'none' : 'block';
+    }
+
+    // Load saved theme or default to dark
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+    updateThemeIcons();
+
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcons();
+    });
+
+    {{ if site.IsMultiLingual }}
+    // Language toggle
+    const langToggle = document.getElementById('langToggle');
+    if (langToggle) {
+        langToggle.addEventListener('click', () => {
+            const currentLang = '{{ .Lang }}';
+            const newLang = currentLang === 'en' ? 'tr' : 'en';
+            const currentPath = window.location.pathname;
+            let newPath;
+            if (currentLang === 'en') {
+                newPath = '/' + newLang + currentPath;
+            } else {
+                newPath = currentPath.replace(/^\/tr/, '');
+            }
+            window.location.href = newPath || '/';
+        });
+    }
+    {{ end }}
+
+    // Search functionality
+    const searchInput = document.querySelector('.search-input');
+    if (searchInput) {
+        const posts = document.querySelectorAll('.post-item');
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            posts.forEach(post => {
+                const title = post.querySelector('.post-title').textContent.toLowerCase();
+                const excerpt = post.querySelector('.post-excerpt')?.textContent.toLowerCase() || '';
+                const isVisible = title.includes(query) || excerpt.includes(query);
+                post.style.display = isVisible ? 'block' : 'none';
+            });
+        });
+    }
+
+    // Tag filter
+    document.querySelectorAll('.tags-filter .tag').forEach(tag => {
+        tag.addEventListener('click', () => {
+            const tagName = tag.dataset.tag;
+            document.querySelectorAll('.tags-filter .tag').forEach(t => t.classList.remove('active'));
+            tag.classList.add('active');
+
+            const posts = document.querySelectorAll('.post-item');
+            posts.forEach(post => {
+                if (tagName === 'all') {
+                    post.style.display = 'block';
+                } else {
+                    const postTags = post.dataset.tags?.split(',') || [];
+                    post.style.display = postTags.includes(tagName) ? 'block' : 'none';
+                }
+            });
+        });
+    });
+
+    // Back to top (for single pages)
+    const backToTop = document.getElementById('backToTop');
+    if (backToTop) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // TOC active state
+    const tocLinks = document.querySelectorAll('.toc a');
+    const headings = document.querySelectorAll('h2[id], h3[id]');
+    if (tocLinks.length > 0) {
+        function updateTocActive() {
+            let current = '';
+            headings.forEach(heading => {
+                const rect = heading.getBoundingClientRect();
+                if (rect.top <= 150) {
+                    current = heading.getAttribute('id');
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateTocActive);
+        updateTocActive();
+    }
+
+    // Copy button for code blocks
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const codeBlock = btn.closest('.highlight');
+            const code = codeBlock.querySelector('code').textContent;
+            navigator.clipboard.writeText(code);
+            btn.innerHTML = `
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M20 6L9 17l-5-5"></path>
+                </svg>
+                Copied!
+            `;
+            setTimeout(() => {
+                btn.innerHTML = `
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    Copy
+                `;
+            }, 2000);
+        });
+    });
+</script>

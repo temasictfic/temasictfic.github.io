@@ -1,0 +1,13 @@
+# Theme metadata
+name = "ccblog"
+license = "MIT"
+licenselink = "https://github.com/username/ccblog/blob/main/LICENSE"
+description = "A minimal, elegant blog theme with dark/light mode and multilingual support"
+homepage = "https://github.com/username/ccblog"
+tags = ["blog", "minimal", "dark mode", "multilingual", "responsive"]
+features = ["dark mode", "light mode", "multilingual", "syntax highlighting", "table of contents", "search", "tags"]
+min_version = "0.112.0"
+
+[author]
+  name = "Your Name"
+  homepage = "https://example.com"

@@ -1,0 +1,57 @@
+baseURL = 'https://username.github.io/'
+languageCode = 'en-us'
+title = 'Writings'
+theme = 'ccblog'
+
+defaultContentLanguage = 'en'
+defaultContentLanguageInSubdir = false
+
+[params]
+  description = "Personal blog about programming and technology"
+  author = "Your Name"
+
+[languages]
+  [languages.en]
+    languageName = "EN"
+    weight = 1
+    title = "Writings"
+    [languages.en.params]
+      logo = "Writings"
+      searchPlaceholder = "Search articles..."
+      recentTitle = "Recent writings"
+      blogNav = "Blog"
+      aboutNav = "About"
+      projectsNav = "Projects"
+
+  [languages.tr]
+    languageName = "TR"
+    weight = 2
+    title = "Yazılar"
+    [languages.tr.params]
+      logo = "Yazılar"
+      searchPlaceholder = "Yazı ara..."
+      recentTitle = "Son yazılar"
+      blogNav = "Blog"
+      aboutNav = "Hakkımda"
+      projectsNav = "Projeler"
+
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNos = false
+    noClasses = false
+    style = "monokai"
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+    ordered = false
+
+[taxonomies]
+  tag = "tags"
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+
+enableRobotsTXT = true
