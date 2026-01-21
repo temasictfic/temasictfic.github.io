@@ -9,6 +9,7 @@ defaultContentLanguageInSubdir = false
 [params]
   description = "Personal blog about programming and technology"
   author = "SÇ"
+  github = "temasictfic"
 
 [languages]
   [languages.en]
