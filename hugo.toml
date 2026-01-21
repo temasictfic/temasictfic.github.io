@@ -41,7 +41,7 @@ defaultContentLanguageInSubdir = false
     guessSyntax = true
     lineNos = false
     noClasses = false
-    style = "monokai"
+    style = "rose-pine-moon"
   [markup.tableOfContents]
     startLevel = 2
     endLevel = 3
