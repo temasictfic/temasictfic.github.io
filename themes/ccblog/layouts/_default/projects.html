@@ -70,8 +70,8 @@
     <section class="projects-section">
         <h2 class="section-label">All Projects</h2>
         <div class="projects-grid">
-            {{ range . }}
-            <div class="project-card" style="animation-delay: {{ mul (index (seq 10) (mod $.Scratch.Add "i" 1)) 0.05 }}s">
+            {{ range $i, $project := . }}
+            <div class="project-card" style="animation-delay: {{ mul $i 0.05 }}s">
                 <div class="project-card-inner">
                     <div class="project-content">
                         <div class="project-header">
