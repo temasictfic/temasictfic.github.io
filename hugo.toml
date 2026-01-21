@@ -2,6 +2,7 @@ baseURL = 'https://temasictfic.github.io/'
 languageCode = 'en-us'
 title = 'Writings'
 theme = 'ccblog'
+enableRobotsTXT = true
 
 defaultContentLanguage = 'en'
 defaultContentLanguageInSubdir = false
@@ -55,4 +56,4 @@ defaultContentLanguageInSubdir = false
   home = ["HTML", "RSS"]
   section = ["HTML", "RSS"]
 
-enableRobotsTXT = true
+
