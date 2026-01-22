@@ -1,4 +1,4 @@
-baseURL = 'https://YOUR-SITE.netlify.app/'
+baseURL = 'https://temasictfic.netlify.app/'
 languageCode = 'en-us'
 title = 'Writings'
 theme = 'ccblog'
