@@ -1,0 +1,184 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: static/images
+public_folder: /images
+
+i18n:
+  structure: multiple_files
+  locales: [en, tr]
+  default_locale: en
+
+collections:
+  # Blog Posts
+  - name: posts
+    label: Blog Posts
+    folder: content/posts
+    create: true
+    slug: "{{slug}}"
+    i18n: true
+    extension: md
+    format: yaml-frontmatter
+    fields:
+      - { label: Title, name: title, widget: string, i18n: true }
+      - { label: Date, name: date, widget: datetime, format: "YYYY-MM-DD" }
+      - { label: Description, name: description, widget: string, i18n: true }
+      - { label: Tags, name: tags, widget: list, i18n: duplicate }
+      - { label: Body, name: body, widget: markdown, i18n: true }
+
+  # Homepage (About)
+  - name: homepage
+    label: Homepage
+    files:
+      - name: homepage_en
+        label: Homepage (EN)
+        file: content/_index.md
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Name, name: name, widget: string }
+          - { label: Role, name: role, widget: string }
+          - { label: Location, name: location, widget: string }
+          - { label: Avatar URL, name: avatar, widget: string, required: false }
+          - { label: Tagline, name: tagline, widget: string }
+          - label: Skills
+            name: skills
+            widget: object
+            fields:
+              - { label: Languages, name: Languages, widget: list }
+              - { label: Systems, name: Systems, widget: list }
+              - { label: Tools, name: Tools, widget: list }
+          - label: Experience
+            name: experience
+            widget: list
+            fields:
+              - { label: Date, name: date, widget: string }
+              - { label: Title, name: title, widget: string }
+              - { label: Company, name: company, widget: string }
+              - { label: Description, name: description, widget: string }
+          - label: Social
+            name: social
+            widget: object
+            fields:
+              - { label: GitHub, name: github, widget: string, required: false }
+              - { label: Twitter, name: twitter, widget: string, required: false }
+              - { label: LinkedIn, name: linkedin, widget: string, required: false }
+              - { label: Email, name: email, widget: string, required: false }
+          - { label: Body, name: body, widget: markdown }
+      - name: homepage_tr
+        label: Homepage (TR)
+        file: content/_index.tr.md
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Name, name: name, widget: string }
+          - { label: Role, name: role, widget: string }
+          - { label: Location, name: location, widget: string }
+          - { label: Avatar URL, name: avatar, widget: string, required: false }
+          - { label: Tagline, name: tagline, widget: string }
+          - label: Skills
+            name: skills
+            widget: object
+            fields:
+              - { label: Diller, name: Diller, widget: list }
+              - { label: Sistemler, name: Sistemler, widget: list }
+              - { label: Araçlar, name: Araçlar, widget: list }
+          - label: Experience
+            name: experience
+            widget: list
+            fields:
+              - { label: Date, name: date, widget: string }
+              - { label: Title, name: title, widget: string }
+              - { label: Company, name: company, widget: string }
+              - { label: Description, name: description, widget: string }
+          - label: Social
+            name: social
+            widget: object
+            fields:
+              - { label: GitHub, name: github, widget: string, required: false }
+              - { label: Twitter, name: twitter, widget: string, required: false }
+              - { label: LinkedIn, name: linkedin, widget: string, required: false }
+              - { label: Email, name: email, widget: string, required: false }
+          - { label: Body, name: body, widget: markdown }
+
+  # Projects Page
+  - name: projects
+    label: Projects
+    files:
+      - name: projects_en
+        label: Projects (EN)
+        file: content/projects.md
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Layout, name: layout, widget: hidden, default: projects }
+          - label: Featured
+            name: featured
+            widget: list
+            fields:
+              - { label: Name, name: name, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: Tech, name: tech, widget: list }
+              - { label: Year, name: year, widget: string }
+              - { label: GitHub, name: github, widget: string, required: false }
+              - { label: Demo, name: demo, widget: string, required: false }
+              - { label: Image, name: image, widget: string, required: false }
+          - label: Projects
+            name: projects
+            widget: list
+            fields:
+              - { label: Name, name: name, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: Tech, name: tech, widget: list }
+              - { label: Year, name: year, widget: string }
+              - { label: GitHub, name: github, widget: string, required: false }
+              - { label: Demo, name: demo, widget: string, required: false }
+          - label: Callout
+            name: callout
+            widget: object
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Description, name: description, widget: string }
+              - label: Link
+                name: link
+                widget: object
+                fields:
+                  - { label: Text, name: text, widget: string }
+                  - { label: URL, name: url, widget: string }
+      - name: projects_tr
+        label: Projects (TR)
+        file: content/projects.tr.md
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Layout, name: layout, widget: hidden, default: projects }
+          - label: Featured
+            name: featured
+            widget: list
+            fields:
+              - { label: Name, name: name, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: Tech, name: tech, widget: list }
+              - { label: Year, name: year, widget: string }
+              - { label: GitHub, name: github, widget: string, required: false }
+              - { label: Demo, name: demo, widget: string, required: false }
+              - { label: Image, name: image, widget: string, required: false }
+          - label: Projects
+            name: projects
+            widget: list
+            fields:
+              - { label: Name, name: name, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: Tech, name: tech, widget: list }
+              - { label: Year, name: year, widget: string }
+              - { label: GitHub, name: github, widget: string, required: false }
+              - { label: Demo, name: demo, widget: string, required: false }
+          - label: Callout
+            name: callout
+            widget: object
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Description, name: description, widget: string }
+              - label: Link
+                name: link
+                widget: object
+                fields:
+                  - { label: Text, name: text, widget: string }
+                  - { label: URL, name: url, widget: string }
