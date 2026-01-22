@@ -11,6 +11,8 @@ defaultContentLanguageInSubdir = false
   description = "Personal blog about programming and technology"
   author = "SÇ"
   github = "temasictfic"
+  name = "Your Name"
+  avatar = ""
 
 [languages]
   [languages.en]
@@ -18,11 +20,9 @@ defaultContentLanguageInSubdir = false
     weight = 1
     title = "Writings"
     [languages.en.params]
-      logo = "Writings"
       searchPlaceholder = "Search articles..."
       recentTitle = "Recent writings"
       blogNav = "Blog"
-      aboutNav = "About"
       projectsNav = "Projects"
 
   [languages.tr]
@@ -30,11 +30,9 @@ defaultContentLanguageInSubdir = false
     weight = 2
     title = "Yazılar"
     [languages.tr.params]
-      logo = "Yazılar"
       searchPlaceholder = "Yazı ara..."
       recentTitle = "Son yazılar"
       blogNav = "Blog"
-      aboutNav = "Hakkımda"
       projectsNav = "Projeler"
 
 [markup]

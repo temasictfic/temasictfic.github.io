@@ -109,22 +109,34 @@ header {
     gap: 24px;
 }
 
-.logo {
-    font-family: var(--font-display);
-    font-size: 28px;
-    color: var(--text-primary);
+.header-avatar-link {
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    letter-spacing: -0.02em;
-    transition: color 0.2s;
 }
 
-.logo:hover {
+.header-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent);
+    transition: all 0.2s ease;
+}
+
+.header-avatar-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-secondary);
+    font-family: var(--font-display);
+    font-size: 18px;
     color: var(--accent);
 }
 
-.logo em {
-    font-style: italic;
-    opacity: 0.7;
+.header-avatar-link:hover .header-avatar {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 3px var(--tag-bg);
 }
 
 nav {

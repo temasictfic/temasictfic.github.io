@@ -12,7 +12,7 @@
         </main>
         {{- partial "footer.html" . -}}
         {{- if .IsPage }}</div>{{- end }}
-        {{- if .IsPage }}{{- partial "toc.html" . -}}{{- end }}
+        {{- if and .IsPage (not (in (slice "about" "projects") .Layout)) }}{{- partial "toc.html" . -}}{{- end }}
     </div>
     {{- if .IsPage }}{{- partial "back-to-top.html" . -}}{{- end }}
     {{- partial "scripts.html" . -}}

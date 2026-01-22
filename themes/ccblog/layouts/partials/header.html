@@ -1,9 +1,16 @@
 <header>
     <div class="header-content">
-        <a href="{{ "/" | relLangURL }}" class="logo">{{ site.Params.logo | default site.Title }}<em>.</em></a>
+        <a href="{{ "/" | relLangURL }}" class="header-avatar-link" title="Home">
+            {{ with site.Params.avatar }}
+            <img src="{{ . }}" alt="{{ site.Params.name }}" class="header-avatar">
+            {{ else }}
+            <div class="header-avatar header-avatar-placeholder">
+                <span>{{ substr (site.Params.name | default "?") 0 1 }}</span>
+            </div>
+            {{ end }}
+        </a>
         <nav>
-            <a href="{{ "/" | relLangURL }}" class="nav-link{{ if .IsHome }} active{{ end }}">{{ T "blogNav" | default "Blog" }}</a>
-            <a href="{{ "/about/" | relLangURL }}" class="nav-link{{ if eq .RelPermalink "/about/" }} active{{ end }}">{{ T "aboutNav" | default "About" }}</a>
+            <a href="{{ "/posts/" | relLangURL }}" class="nav-link{{ if eq .Section "posts" }} active{{ end }}">{{ T "blogNav" | default "Blog" }}</a>
             <a href="{{ "/projects/" | relLangURL }}" class="nav-link{{ if eq .RelPermalink "/projects/" }} active{{ end }}">{{ T "projectsNav" | default "Projects" }}</a>
         </nav>
         <div class="controls">
