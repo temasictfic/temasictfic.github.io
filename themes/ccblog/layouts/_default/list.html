@@ -11,7 +11,7 @@
     </div>
 </section>
 
-{{ $posts := .Pages }}
+{{ $posts := where site.RegularPages "Section" "posts" }}
 {{ $allTags := slice }}
 {{ range $posts }}
     {{ range .Params.tags }}
