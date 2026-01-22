@@ -77,6 +77,23 @@
         });
     });
 
+    // Sort by date
+    const sortSelect = document.getElementById('sortSelect');
+    if (sortSelect) {
+        sortSelect.addEventListener('change', () => {
+            const postsList = document.querySelector('.posts-list');
+            const posts = Array.from(postsList.querySelectorAll('.post-item'));
+
+            posts.sort((a, b) => {
+                const dateA = new Date(a.dataset.date);
+                const dateB = new Date(b.dataset.date);
+                return sortSelect.value === 'newest' ? dateB - dateA : dateA - dateB;
+            });
+
+            posts.forEach(post => postsList.appendChild(post));
+        });
+    }
+
     // Back to top (for single pages)
     const backToTop = document.getElementById('backToTop');
     if (backToTop) {

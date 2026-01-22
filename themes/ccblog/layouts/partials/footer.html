@@ -1,6 +1,6 @@
 <footer>
     <p class="footer-text">
-        &copy; {{ now.Year }} · Built with curiosity ·
+        &copy; {{ now.Year }} · {{ T "builtWith" | default "Built with curiosity" }} ·
         <a href="{{ "/index.xml" | relURL }}">RSS</a> ·
         <a href="https://github.com/{{ site.Params.github }}">GitHub</a>
     </p>

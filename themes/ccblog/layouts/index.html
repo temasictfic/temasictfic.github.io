@@ -42,7 +42,7 @@
     <section class="about-section">
         <h2 class="section-title">
             <span class="section-number">01</span>
-            Skills & Technologies
+            {{ T "skillsTitle" | default "Skills & Technologies" }}
         </h2>
         <div class="skills-grid">
             {{ range $category, $items := . }}
@@ -63,7 +63,7 @@
     <section class="about-section">
         <h2 class="section-title">
             <span class="section-number">02</span>
-            Experience
+            {{ T "experienceTitle" | default "Experience" }}
         </h2>
         <div class="timeline">
             {{ range . }}
@@ -87,7 +87,7 @@
     <section class="about-section about-connect">
         <h2 class="section-title">
             <span class="section-number">03</span>
-            Connect
+            {{ T "connectTitle" | default "Connect" }}
         </h2>
         <div class="social-links">
             {{ with .github }}

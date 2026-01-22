@@ -146,11 +146,11 @@ nav {
 }
 
 .nav-link {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
     color: var(--text-secondary);
     text-decoration: none;
-    padding: 8px 14px;
+    padding: 10px 16px;
     border-radius: 6px;
     transition: all 0.2s ease;
 }
