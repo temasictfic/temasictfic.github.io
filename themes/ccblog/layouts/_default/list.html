@@ -53,7 +53,7 @@
             </span>
         </div>
         <h3 class="post-title">{{ .Title }}</h3>
-        <p class="post-excerpt">{{ .Summary | plainify | truncate 200 }}</p>
+        <p class="post-excerpt">{{ .Summary | plainify | htmlUnescape | truncate 200 }}</p>
         <div class="post-tags">
             {{ range .Params.tags }}
             <span class="post-tag">{{ . }}</span>
