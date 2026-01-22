@@ -335,7 +335,7 @@ nav {
     transition: all 0.2s ease;
 }
 
-.post-item:first-child {
+.post-item.first-visible {
     padding-top: 0;
 }
 

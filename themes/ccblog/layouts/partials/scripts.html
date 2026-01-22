@@ -58,6 +58,18 @@
         });
     }
 
+    // Helper to mark first visible post
+    function updateFirstVisiblePost() {
+        const posts = document.querySelectorAll('.post-item');
+        posts.forEach(post => post.classList.remove('first-visible'));
+        for (const post of posts) {
+            if (post.style.display !== 'none') {
+                post.classList.add('first-visible');
+                break;
+            }
+        }
+    }
+
     // Tag filter
     document.querySelectorAll('.tags-filter .tag').forEach(tag => {
         tag.addEventListener('click', () => {
@@ -74,6 +86,7 @@
                     post.style.display = postTags.includes(tagName) ? 'block' : 'none';
                 }
             });
+            updateFirstVisiblePost();
         });
     });
 
@@ -91,8 +104,12 @@
             });
 
             posts.forEach(post => postsList.appendChild(post));
+            updateFirstVisiblePost();
         });
     }
+
+    // Initialize first visible post on page load
+    updateFirstVisiblePost();
 
     // Back to top (for single pages)
     const backToTop = document.getElementById('backToTop');
