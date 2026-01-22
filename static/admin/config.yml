@@ -6,11 +6,6 @@ backend:
 media_folder: static/images
 public_folder: /images
 
-i18n:
-  structure: multiple_files
-  locales: [en, tr]
-  default_locale: en
-
 collections:
   # Blog Posts
   - name: posts
@@ -20,7 +15,6 @@ collections:
     slug: "{{slug}}"
     extension: md
     format: yaml-frontmatter
-    filter: { field: date }
     fields:
       - { label: Title, name: title, widget: string }
       - { label: Date, name: date, widget: datetime, format: "YYYY-MM-DD" }
