@@ -41,7 +41,7 @@
 
 <div class="posts-list">
     {{ range $posts.ByDate.Reverse }}
-    <a href="{{ .RelPermalink }}" class="post-item" data-tags="{{ with .Params.tags }}{{ delimit . "," | urlize }}{{ end }}">
+    <a href="{{ .RelPermalink }}" class="post-item" data-tags="{{ range $i, $t := .Params.tags }}{{ if $i }},{{ end }}{{ $t | urlize }}{{ end }}">
         <div class="post-meta">
             <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
             <span class="post-reading-time">
