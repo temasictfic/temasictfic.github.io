@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: temasictfic/temasictfic.github.io
   branch: main
 
 media_folder: static/images
